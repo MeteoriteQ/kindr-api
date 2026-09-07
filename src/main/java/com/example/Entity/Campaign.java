@@ -29,6 +29,7 @@ public class Campaign {
     @Lob
     @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String story;
+    @Lob
     @Column(columnDefinition = "LONGTEXT")
     private String image;
     @Column(length = 255)
