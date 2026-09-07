@@ -1,0 +1,54 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1">
+
+    <title>Secure checkout | Kindr</title>
+
+    <link rel="icon"
+          href="logo3.png">
+
+    <link rel="stylesheet"
+          href="app.css">
+
+    <link rel="stylesheet"
+          href="checkout.css">
+</head>
+
+<body class="checkout-page">
+
+<nav class="checkout-nav">
+
+    <a href="index.html">
+        <img src="logo3.png"
+             alt="Kindr">
+    </a>
+
+    <span>
+        🔒 Secure checkout
+    </span>
+
+</nav>
+
+<main class="checkout-shell"
+      data-checkout>
+
+    <div class="checkout-loading">
+        Preparing your checkout…
+    </div>
+
+</main>
+
+<!-- RAZORPAY -->
+<script
+    src="https://checkout.razorpay.com/v1/checkout.js">
+</script>
+
+<script src="app.js"></script>
+<script src="checkout.js"></script>
+
+</body>
+</html>

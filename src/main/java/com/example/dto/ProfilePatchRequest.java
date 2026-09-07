@@ -1,0 +1,2 @@
+package com.example.dto;
+public class ProfilePatchRequest { private String firstName,lastName,phone,bio,city; public String getFirstName(){return firstName;}public void setFirstName(String v){firstName=v;}public String getLastName(){return lastName;}public void setLastName(String v){lastName=v;}public String getPhone(){return phone;}public void setPhone(String v){phone=v;}public String getBio(){return bio;}public void setBio(String v){bio=v;}public String getCity(){return city;}public void setCity(String v){city=v;} }

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Kindr</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="logo3.png">
+  <link rel="stylesheet" href="fundraising-pages.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo"><img src="logo3.png" alt="Kindr logo"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="donate.html">Donate</a></li>
+      <li><a href="fundraise.html">Fundraise</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a class="active" href="contact-us.html">Contact us</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="sign-in.html" class="cta-btn">Sign in</a>
+      <a href="start-fundraiser.html" class="cta-btn primary">Start a fundraiser</a>
+      <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <p class="mobile-menu-title">Menu</p>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="donate.html">Donate</a></li>
+      <li><a href="fundraise.html">Fundraise</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a class="active" href="contact-us.html">Contact us</a></li>
+    </ul>
+    <div class="mobile-actions">
+      <a href="sign-in.html" class="mobile-action">Sign in</a>
+      <a href="start-fundraiser.html" class="mobile-action primary">Start a fundraiser</a>
+    </div>
+  </div>
+
+  <main class="form-page">
+    <div class="section-inner form-shell">
+      <section class="form-panel">
+        <div class="panel-mark"><span></span> Kindr</div>
+        <h1>We are here to help.</h1>
+        <p>Have a question about donations, fundraiser setup, verification, or campaign support? Send us a message.</p>
+        <div class="panel-list">
+          <div class="panel-item"><b><i class="fa-solid fa-envelope"></i></b><span>Email support<br>support@fundguru.in</span></div>
+          <div class="panel-item"><b><i class="fa-solid fa-phone"></i></b><span>Phone<br>+91 98765 43210</span></div>
+          <div class="panel-item"><b><i class="fa-solid fa-location-dot"></i></b><span>Office<br>Bengaluru, India</span></div>
+        </div>
+      </section>
+
+      <section class="form-wrap">
+        <h2>Contact us</h2>
+        <p>Tell us what you need and our team will reply soon.</p>
+        <form class="site-form">
+          <label>First name <input type="text" placeholder="First name" required></label>
+          <label>Last name <input type="text" placeholder="Last name" required></label>
+          <label>Email address <input type="email" placeholder="you@example.com" required></label>
+          <label>Mobile number <input type="tel" placeholder="+91 98765 43210"></label>
+          <label class="full">Topic
+            <select required>
+              <option value="">Select a topic</option>
+              <option>Starting a fundraiser</option>
+              <option>Donation support</option>
+              <option>Verification help</option>
+              <option>Technical issue</option>
+            </select>
+          </label>
+          <label class="full">Message <textarea placeholder="Tell us how we can help." required></textarea></label>
+          <button type="submit">Send message</button>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="fundraising-pages.js"></script>
+</body>
+</html>

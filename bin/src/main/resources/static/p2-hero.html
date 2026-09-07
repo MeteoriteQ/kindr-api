@@ -1,0 +1,452 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FundGuru Hero Section</title>
+
+  <!-- CSS starts here -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green: #4aac3a;
+      --green-dark: #3f9831;
+      --blue: #1591DC;
+      --ink: #222222;
+      --muted: #68727d;
+      --white: #ffffff;
+      --soft: #f5fbf4;
+      --line: rgba(34, 34, 34, 0.12);
+      --shadow: 0 28px 80px rgba(34, 34, 34, 0.16);
+    }
+
+    body {
+      font-family: Calibri, Arial, sans-serif;
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    .hero {
+      min-height: calc(100vh - 5rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.92fr);
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      padding: 5rem 7vw 4rem;
+      background:
+        linear-gradient(135deg, rgba(74, 172, 58, 0.1), transparent 34%),
+        linear-gradient(315deg, rgba(21, 145, 220, 0.08), transparent 32%),
+        var(--white);
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 42rem;
+      
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 1.15rem;
+      padding: 0.45rem 0.8rem;
+      border: 1px solid rgba(74, 172, 58, 0.24);
+      border-radius: 99rem;
+      background: rgba(74, 172, 58, 0.08);
+      color: var(--green-dark);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero-kicker span {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0.35rem rgba(74, 172, 58, 0.12);
+    }
+
+    .hero h1 {
+      max-width: 41rem;
+      color: var(--ink);
+      font-size: clamp(2.45rem, 5vw, 5.25rem);
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .hero h1 strong {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .hero-text {
+      max-width: 34rem;
+      margin-top: 1.25rem;
+      color: var(--muted);
+      font-size: 1.18rem;
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3.25rem;
+      padding: 0.9rem 1.35rem;
+      border: 1px solid var(--green);
+      border-radius: 99rem;
+      background: var(--green);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 800;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .hero-btn:hover {
+      background: var(--green-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 42px rgba(74, 172, 58, 0.3);
+    }
+
+    .hero-note {
+      color: var(--muted);
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 35rem;
+      margin-top: 2.25rem;
+    }
+
+    .hero-stat {
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .hero-stat b {
+      display: block;
+      color: var(--ink);
+      font-size: 1.45rem;
+      font-weight: 900;
+    }
+
+    .hero-stat span {
+      display: block;
+      margin-top: 0.2rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .hero-carousel {
+      position: relative;
+      min-height: 34rem;
+    }
+
+    .carousel-card {
+      position: absolute;
+      overflow: hidden;
+      border: 0.55rem solid var(--white);
+      border-radius: 1.25rem;
+      background: var(--soft);
+      box-shadow: var(--shadow);
+      transition: transform 0.55s ease, opacity 0.55s ease, filter 0.55s ease;
+    }
+
+    .carousel-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .carousel-card.main {
+      right: 4%;
+      top: 4%;
+      width: min(78%, 30rem);
+      height: 26rem;
+      z-index: 3;
+    }
+
+    .carousel-card.side {
+      left: 0;
+      bottom: 7%;
+      width: 43%;
+      height: 15rem;
+      z-index: 4;
+    }
+
+    .carousel-card.back {
+      right: 0;
+      bottom: 0;
+      width: 47%;
+      height: 13rem;
+      z-index: 2;
+      opacity: 0.95;
+    }
+
+    .carousel-card.is-changing {
+      transform: translateX(1rem) scale(0.98);
+      opacity: 0.55;
+      filter: saturate(0.8);
+    }
+
+    .carousel-badge {
+      position: absolute;
+      left: 9%;
+      top: 10%;
+      z-index: 5;
+      width: 9.5rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 18px 50px rgba(34, 34, 34, 0.16);
+      backdrop-filter: blur(14px);
+    }
+
+    .carousel-badge b {
+      display: block;
+      color: var(--green);
+      font-size: 1.8rem;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .carousel-badge span {
+      display: block;
+      margin-top: 0.35rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      right: 8%;
+      bottom: 1.2rem;
+      z-index: 6;
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .carousel-dot {
+      width: 0.6rem;
+      height: 0.6rem;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(34, 34, 34, 0.22);
+      cursor: pointer;
+      transition: width 0.25s ease, background 0.25s ease;
+    }
+
+    .carousel-dot.active {
+      width: 1.6rem;
+      border-radius: 99rem;
+      background: var(--green);
+    }
+
+    @media (max-width: 1000px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 3.4rem 1.2rem 3rem;
+      }
+
+      .hero-carousel {
+        min-height: 30rem;
+      }
+
+      .carousel-card.main {
+        width: 80%;
+        height: 22rem;
+      }
+    }
+
+    @media (max-width: 786px) {
+      .hero {
+        padding-top: 2.4rem;
+      }
+
+      .hero h1 {
+        font-size: 2.45rem;
+      }
+
+      .hero-text {
+        font-size: 1.02rem;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+
+      .hero-carousel {
+        min-height: 24rem;
+      }
+
+      .carousel-card {
+        border-width: 0.4rem;
+        border-radius: 1rem;
+      }
+
+      .carousel-card.main {
+        right: 0;
+        width: 84%;
+        height: 18rem;
+      }
+
+      .carousel-card.side {
+        width: 48%;
+        height: 10rem;
+      }
+
+      .carousel-card.back {
+        width: 52%;
+        height: 9rem;
+      }
+
+      .carousel-badge {
+        left: 0;
+        width: 8.5rem;
+      }
+    }
+  </style>
+  <!-- CSS ends here -->
+</head>
+<body>
+
+  <!-- HTML starts here -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-kicker"><span></span> India's trusted fundraising platform</p>
+      <h1>Start a fundraiser for the cause that <strong>matters most.</strong></h1>
+      <p class="hero-text">
+        FundGuru helps people raise support for medical needs, education, emergencies, and community causes with a simple, transparent, and caring experience.
+      </p>
+
+      <div class="hero-actions">
+        <a href="start-fundraiser.html" class="hero-btn">Start a fundraiser</a>
+        <p class="hero-note">Quick setup. Real support. Trusted giving.</p>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <b>10k+</b>
+          <span>fundraisers started</span>
+        </div>
+        <div class="hero-stat">
+          <b>24/7</b>
+          <span>support available</span>
+        </div>
+        <div class="hero-stat">
+          <b>100%</b>
+          <span>secure donations</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-carousel" aria-label="FundGuru campaign highlights">
+      <div class="carousel-badge">
+        <b>Hope</b>
+        <span>made easier through community giving</span>
+      </div>
+
+      <div class="carousel-card main">
+        <img src="FundGuruDonate_transparent_1.png" alt="FundGuru donation campaign">
+      </div>
+      <div class="carousel-card side">
+        <img src="FundGuru-green.png" alt="FundGuru fundraising support">
+      </div>
+      <div class="carousel-card back">
+        <img src="FundGuru.jpg" alt="FundGuru community giving">
+      </div>
+
+      <div class="carousel-dots" aria-label="Carousel controls">
+        <button class="carousel-dot active" type="button" aria-label="Show slide 1"></button>
+        <button class="carousel-dot" type="button" aria-label="Show slide 2"></button>
+        <button class="carousel-dot" type="button" aria-label="Show slide 3"></button>
+      </div>
+    </div>
+  </section>
+  <!-- HTML ends here -->
+
+  <!-- JavaScript starts here -->
+  <script>
+    const heroImages = [
+      {
+        main: "FundGuruDonate_transparent_1.png",
+        side: "FundGuru-green.png",
+        back: "FundGuru.jpg"
+      },
+      {
+        main: "FundGuru-green.png",
+        side: "FundGuru.jpg",
+        back: "FundGuruDonate_transparent_1.png"
+      },
+      {
+        main: "FundGuru.jpg",
+        side: "FundGuruDonate_transparent_1.png",
+        back: "FundGuru-green.png"
+      }
+    ];
+
+    const carouselCards = document.querySelectorAll(".carousel-card");
+    const carouselDots = document.querySelectorAll(".carousel-dot");
+    const mainImage = document.querySelector(".carousel-card.main img");
+    const sideImage = document.querySelector(".carousel-card.side img");
+    const backImage = document.querySelector(".carousel-card.back img");
+    let activeHeroSlide = 0;
+
+    function updateHeroCarousel(index) {
+      activeHeroSlide = index;
+
+      carouselCards.forEach(card => card.classList.add("is-changing"));
+
+      setTimeout(() => {
+        mainImage.src = heroImages[index].main;
+        sideImage.src = heroImages[index].side;
+        backImage.src = heroImages[index].back;
+
+        carouselDots.forEach((dot, dotIndex) => {
+          dot.classList.toggle("active", dotIndex === index);
+        });
+
+        carouselCards.forEach(card => card.classList.remove("is-changing"));
+      }, 220);
+    }
+
+    carouselDots.forEach((dot, index) => {
+      dot.addEventListener("click", () => updateHeroCarousel(index));
+    });
+
+    setInterval(() => {
+      const nextSlide = (activeHeroSlide + 1) % heroImages.length;
+      updateHeroCarousel(nextSlide);
+    }, 4200);
+  </script>
+  <!-- JavaScript ends here -->
+</body>
+</html>

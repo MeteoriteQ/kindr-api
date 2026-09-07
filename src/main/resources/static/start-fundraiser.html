@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start a Fundraiser | Kindr</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="logo3.png">
+  <link rel="stylesheet" href="fundraising-pages.css">
+</head>
+<body>
+  <a href="index.html" class="logo form-logo"><img src="logo3.png" alt="Kindr logo"></a>
+
+  <main class="form-page simple-form-page">
+    <div class="section-inner form-shell">
+      <section class="form-panel">
+        <div class="panel-mark"><span></span> Kindr</div>
+        <h1>Start your fundraiser with confidence.</h1>
+        <p>Share your story, set your goal, and invite people to support your cause through a trusted campaign page.</p>
+        <div class="panel-list">
+          <div class="panel-item"><b>1</b><span>Choose the cause and category.</span></div>
+          <div class="panel-item"><b>2</b><span>Add a clear goal and short story.</span></div>
+          <div class="panel-item"><b>3</b><span>Publish, share, and receive support.</span></div>
+        </div>
+      </section>
+
+      <section class="form-wrap">
+        <h2>Fundraiser details</h2>
+        <p>Keep it clear. You can add more proof and updates after publishing.</p>
+        <form class="site-form" data-campaign-form>
+          <label>Fundraiser title <input name="title" type="text" placeholder="Help Aarav fight surgery costs" required></label>
+          <label>Category
+            <select name="category" required>
+              <option value="">Select category</option>
+              <option>Medical</option>
+              <option>Education</option>
+              <option>Emergency</option>
+              <option>Community</option>
+            </select>
+          </label>
+          <label>Goal amount <input name="goal" type="number" min="100" placeholder="500000" required></label>
+          <label>City <input name="city" type="text" placeholder="Bengaluru" required></label>
+          <label class="full">Your story <textarea name="story" placeholder="Explain who needs support, why funds are needed, and how donations will help." required></textarea></label>
+          <label class="full">Campaign image or document
+            <input name="imageFile" id="image" type="file" accept="image/*,application/pdf" />
+            <div class="upload">Upload photo, estimate, bill, or proof document</div>
+          </label>
+          <label>Organizer name <input name="organizer" type="text" placeholder="Your full name" required></label>
+          <label>Organizer mobile <input name="organizerPhone" type="tel" placeholder="+91 98765 43210" required></label>
+          <button type="submit">Create fundraiser</button>
+        </form>
+      </section>
+    </div>
+  </main>
+<script src="app.js"></script></body>
+</html>
+

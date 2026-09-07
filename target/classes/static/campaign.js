@@ -1,0 +1,101 @@
+﻿(async function(){
+	const host = document.querySelector('[data-campaign-page]');
+	const id = new URLSearchParams(location.search).get('id');
+	if(!id) return host.innerHTML = '<div class="campaign-error"><h1>Campaign not found</h1><a href="donate.html">Explore campaigns</a></div>';
+	await window.Kindr.getMe();
+	const esc = window.Kindr.escape, money = window.Kindr.formatMoney;
+	let data;
+	try{
+		data = await window.Kindr.api(`/api/campaigns/${encodeURIComponent(id)}`);
+	}catch(e){
+		host.innerHTML = `<div class="campaign-error"><h1>Campaign not found</h1><p>${esc(e.message)}</p><a href="donate.html">Explore campaigns</a></div>`;
+		return;
+	}
+
+	const c = data.campaign;
+	const me = window.Kindr.currentUser();
+	const percent = Math.min(100, Math.round(c.raised / c.goal * 100));
+	// if campaign stores image bytes, serve via API endpoint; otherwise use provided image filename
+	const imageSrc = (c && c.imageContentType) ? `/api/campaigns/${encodeURIComponent(c.id)}/image` : (c.image || 'hero1.jpg');
+
+	document.title = `${c.title} | Kindr`;
+
+	host.innerHTML = `
+		<div class="campaign-shell">
+			<div class="campaign-breadcrumb"><a href="donate.html">Fundraisers</a> / ${esc(c.category)}</div>
+			<div class="campaign-layout">
+				<article class="campaign-main">
+					<span class="eyebrow">${esc(c.category)} fundraiser</span>
+					<h1>${esc(c.title)}</h1>
+					<img class="campaign-image" src="${esc(imageSrc)}" alt="${esc(c.title)}">
+					<section class="campaign-story">
+						<h2>The story</h2>
+						<p>${esc(c.story)}</p>
+						<div class="organizer">
+							<div class="organizer-avatar">${esc((c.organizer||'K')[0])}</div>
+							<div><strong>${esc(c.organizer||'Kindr organizer')}</strong><p>Organizer · ${esc(c.city)}</p></div>
+						</div>
+					</section>
+					<section class="campaign-updates">
+						<h2>Campaign updates</h2>
+						<div data-updates>${data.updates.length ? data.updates.map(u => `
+								<article class="campaign-update"><small>${new Date(u.createdAt).toLocaleDateString('en-IN')}</small><p>${esc(u.message)}</p></article>
+							`).join('') : '<p>No updates have been posted yet.</p>'}</div>
+						${me && me.id === c.ownerId ? `
+							<form class="owner-tools" data-update-form>
+								<label><strong>Post an update</strong><textarea name="message" required placeholder="Tell supporters what has changed…"></textarea></label>
+								<button>Publish update</button>
+							</form>
+						` : ''}
+					</section>
+				</article>
+				<aside>
+					<div class="donate-panel">
+						<div class="donate-total">${money(c.raised)} <small>raised of ${money(c.goal)}</small></div>
+						<div class="big-progress"><span style="width:${percent}%"></span></div>
+						<div class="support-meta"><span>${percent}% funded</span><span>${c.donorCount||0} supporters</span></div>
+						<form class="donation-form" data-donation-form>
+							<label>Donation amount (₹)<input name="amount" type="number" min="10" required placeholder="1000"></label>
+							<textarea name="message" placeholder="Words of support (optional)"></textarea>
+							<label><input name="anonymous" type="checkbox" style="width:auto"> Give anonymously</label>
+							<button>Donate now</button>
+						</form>
+						<button class="share-btn" data-share>Share fundraiser</button>
+						<div class="recent-supporters">
+							<h3>Recent supporters</h3>
+							${data.donations.length ? data.donations.map(d => `<div class="supporter"><span>${d.anonymous ? 'Anonymous' : 'Kindr supporter'}</span><strong>${money(d.amount)}</strong></div>`).join('') : '<p>Be the first to support this fundraiser.</p>'}
+						</div>
+					</div>
+				</aside>
+			</div>
+		</div>`;
+
+	const form = host.querySelector('[data-donation-form]');
+	form.addEventListener('submit', e => {
+		e.preventDefault();
+		const f = form.elements;
+		sessionStorage.setItem('kindr_checkout', JSON.stringify({campaignId: c.id, amount: Number(f.amount.value), anonymous: f.anonymous.checked, message: f.message.value}));
+		location.href = me ? 'checkout.html' : 'sign-in.html?next=checkout.html';
+	});
+
+	const update = host.querySelector('[data-update-form]');
+	if(update) update.addEventListener('submit', async e => {
+		e.preventDefault();
+		try{
+			await window.Kindr.api(`/api/campaigns/${encodeURIComponent(c.id)}/updates`, {method: 'POST', body: JSON.stringify({message: update.elements.message.value})});
+			location.reload();
+		}catch(err){ window.Kindr.toast(err.message, 'error'); }
+	});
+
+	host.querySelector('[data-share]').addEventListener('click', async () => {
+		const share = {title: c.title, text: `Support ${c.title} on Kindr`, url: location.href};
+		try{
+			if(navigator.share) await navigator.share(share);
+			else { await navigator.clipboard.writeText(location.href); window.Kindr.toast('Campaign link copied.'); }
+		}catch{}
+	});
+
+})();
+
+
+

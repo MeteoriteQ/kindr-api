@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FundGuru Footer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green: #4aac3a;
+      --green-dark: #3f9831;
+      --blue: #1591DC;
+      --ink: #222222;
+      --muted: #68727d;
+      --white: #ffffff;
+      --soft: #f5fbf4;
+      --line: rgba(255, 255, 255, 0.14);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      font-family: Calibri, Arial, sans-serif;
+      background: #f7faf7;
+      color: var(--ink);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .footer {
+      width: 100%;
+      background: #182018;
+      color: var(--white);
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 4rem 1.25rem 1.4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.45fr repeat(3, minmax(0, 1fr));
+      gap: 2.2rem;
+    }
+
+    .footer-brand h2 {
+      color: var(--green);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .footer-brand p {
+      max-width: 22rem;
+      margin-top: 0.9rem;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    .footer-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1.5rem;
+      min-height: 3rem;
+      padding: 0.8rem 1.15rem;
+      border-radius: 99rem;
+      background: var(--green);
+      color: var(--white);
+      font-weight: 800;
+      box-shadow: 0 16px 34px rgba(74, 172, 58, 0.22);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .footer-cta:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+    }
+
+    .footer-col h3 {
+      margin-bottom: 1rem;
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 0.72rem;
+      list-style: none;
+    }
+
+    .footer-links a,
+    .footer-contact {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.98rem;
+      line-height: 1.4;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--green);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .footer-social a {
+      display: grid;
+      place-items: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--white);
+      font-weight: 900;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .footer-social a:hover {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 3rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--line);
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 0.92rem;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 840px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .footer-grid,
+      .footer-bottom {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        gap: 1.8rem;
+      }
+
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>FundGuru</h2>
+          <p>FundGuru helps people raise money for medical care, education, emergencies, and community needs with trust and simplicity.</p>
+          <a class="footer-cta" href="start-fundraiser.html">Start a fundraiser</a>
+          <div class="footer-social" aria-label="Social links">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">in</a>
+            <a href="#" aria-label="LinkedIn">li</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Fundraise</h3>
+          <ul class="footer-links">
+            <li><a href="start-fundraiser.html">Start a fundraiser</a></li>
+            <li><a href="#">Medical fundraising</a></li>
+            <li><a href="#">Education support</a></li>
+            <li><a href="#">Emergency help</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul class="footer-links">
+            <li><a href="about.html">About us</a></li>
+            <li><a href="contact-us.html">Contact us</a></li>
+            <li><a href="#">Trust and safety</a></li>
+            <li><a href="#">Help center</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <p class="footer-contact">support@fundguru.in</p>
+          <p class="footer-contact">+91 98765 43210</p>
+          <p class="footer-contact">Bengaluru, India</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 FundGuru. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms</a>
+          <a href="#">Refund policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
