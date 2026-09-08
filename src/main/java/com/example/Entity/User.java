@@ -42,6 +42,12 @@ public class User {
     @Column(name = "avatar_content_type", length = 255)
     private String avatarContentType;
 
+    @Column(name = "avatar_path", length = 255)
+    private String avatarPath;
+
+    public String getAvatarPath() { return avatarPath; }
+    public void setAvatarPath(String value) { avatarPath = value; }
+
     @Lob
     @Column(name = "avatar_data", columnDefinition = "LONGBLOB")
     private byte[] avatarData;

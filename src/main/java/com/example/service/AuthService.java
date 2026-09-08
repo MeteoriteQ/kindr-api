@@ -103,7 +103,7 @@ public class AuthService {
 			return "User not found";
 		if (reset == null) {
 			var opt = otps.findTopByEmailOrderByCreatedAtDesc(email);
-			if (opt.isEmpty() || !opt.get().isVerified())
+			if (opt.isEmpty() || !opt.get().isVerified() || opt.get().getExpiryTime().isBefore(LocalDateTime.now()))
 				return "Please verify OTP first";
 		}
 		u.setPassword(encoder.encode(r.getNewPassword()));
@@ -128,7 +128,8 @@ public class AuthService {
 		m.put("city", u.getCity());
 		m.put("createdAt", u.getCreatedAt());
 		// Avatar URL (frontend can fetch this to display the user's profile image)
-		m.put("avatarUrl", "/api/users/" + (u.getId() == null ? "" : String.valueOf(u.getId())) + "/avatar");
+		m.put("avatarUrl", u.getAvatarPath() != null ? u.getAvatarPath() :
+            (u.getAvatarData() != null && u.getAvatarData().length > 0 ? "/api/users/" + u.getId() + "/avatar" : ""));
 		return m;
 	}
 

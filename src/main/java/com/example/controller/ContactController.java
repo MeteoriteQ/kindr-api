@@ -26,13 +26,16 @@ public class ContactController {
     // ==========================================
 
     @PostMapping
-    public ResponseEntity<ContactResponse> createContact(
+    public ResponseEntity<java.util.Map<String, Object>> createContact(
 
             @Valid
             @RequestBody ContactRequest request) {
 
-        return ResponseEntity.ok(
-                contactService.createContact(request));
+        ContactResponse saved = contactService.createContact(request);
+        return ResponseEntity.status(201).body(java.util.Map.of(
+                "status", "success",
+                "message", "Your message has been received. Thank you for contacting Kindr.",
+                "contact", saved));
     }
 
     // ==========================================

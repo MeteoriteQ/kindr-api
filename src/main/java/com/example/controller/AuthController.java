@@ -48,8 +48,7 @@ public class AuthController {
 	@PostMapping("/forgot-password")
 	public ResponseEntity<?> forgot(@Valid @RequestBody ForgotPasswordRequest r) {
 		String x = auth.forgotPassword(r);
-		return x.startsWith("Password reset") ? ResponseEntity.ok(Map.of("message", x))
-				: ResponseEntity.badRequest().body(Map.of("error", "User not found for given email id"));
+		return ResponseEntity.ok(Map.of("message", "If this email is registered, a password reset link has been sent."));
 	}
 
 	@PostMapping("/verify-otp")

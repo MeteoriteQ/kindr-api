@@ -5,6 +5,8 @@ import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+    @org.springframework.beans.factory.annotation.Value("${kindr.upload-dir:uploads}")
+    private String uploadDirectory = "uploads";
 	@Override
 	public void addCorsMappings(CorsRegistry r) {
 		r.addMapping("/api/**")
@@ -18,6 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// Serve uploaded files from the uploads/ folder at /uploads/**
-		registry.addResourceHandler("/uploads/**").addResourceLocations("file:uploads/");
+		String location = java.nio.file.Path.of(uploadDirectory).toAbsolutePath().normalize().toUri().toString();
+		registry.addResourceHandler("/uploads/**").addResourceLocations(location.endsWith("/") ? location : location + "/");
 	}
 }

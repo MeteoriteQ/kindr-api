@@ -13,16 +13,14 @@ import com.example.service.*;
 @RestController
 @RequestMapping("/api")
 public class UserController {
+ private final AvatarStorage avatars;
  private final SessionService sessions;private final AuthService auth;private final UserRepository users;private final CampaignRepository campaigns;private final DonationRepository donations;
- public UserController(SessionService s,AuthService a,UserRepository u,CampaignRepository c,DonationRepository d){sessions=s;auth=a;users=u;campaigns=c;donations=d;}
+ public UserController(SessionService s,AuthService a,UserRepository u,CampaignRepository c,DonationRepository d,AvatarStorage avatars){sessions=s;auth=a;users=u;campaigns=c;donations=d;this.avatars=avatars;}
     
 	@PatchMapping(value="/users/me/avatar", consumes = {"multipart/form-data"})
 	public Map<String,Object> uploadAvatar(@CookieValue(value="kindr_session",required=false) String token, @RequestPart(value="image", required=true) MultipartFile image) throws Exception {
 		User u = require(token);
-		if(image==null || image.isEmpty()) throw new IllegalArgumentException("No image uploaded");
-		u.setAvatarContentType(image.getContentType());
-		u.setAvatarData(image.getBytes());
-		users.save(u);
+		avatars.save(u, image);
 		return Map.of("user", auth.safe(u));
 	}
 
